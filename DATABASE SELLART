@@ -1,0 +1,45 @@
+CREATE DATABASE IF NOT EXISTS SellArt;
+USE SellArt;
+
+CREATE TABLE Usuario (
+    Id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    CPF VARCHAR(14) UNIQUE NOT NULL,
+    Nome VARCHAR(50) NOT NULL,
+    Nome_artistico VARCHAR(20),
+    Email VARCHAR(50) UNIQUE NOT NULL,
+    Senha VARCHAR (15) NOT NULL,
+    Nivel_acesso ENUM('Artista', 'Consumidor') NOT NULL
+);
+
+CREATE TABLE Portifolio (
+    Id_portifolio INT AUTO_INCREMENT PRIMARY KEY,
+    Id_usuario INT NOT NULL,
+    Sobre_artista TEXT,
+    Foto_url VARCHAR(255),
+    FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id_usuario)
+);
+
+CREATE TABLE Publicacao (
+    Id_publicacao INT AUTO_INCREMENT PRIMARY KEY,
+    Id_portifolio INT NOT NULL,
+    Descricao TEXT,
+    Imagem_url VARCHAR(255),
+    Data_publicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Tipo_arte VARCHAR(50) NOT NULL,
+    FOREIGN KEY (Id_portifolio) REFERENCES Portifolio(Id_portifolio)
+);
+
+CREATE TABLE Feedback (
+    Id_feedback INT AUTO_INCREMENT PRIMARY KEY,
+    Id_publicacao INT NOT NULL,
+    Id_consumidor INT NOT NULL,
+    Comentario TEXT NOT NULL,
+    Avaliacao TINYINT CHECK (Avaliacao BETWEEN 1 AND 5),
+    Data_feedback DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Visivel_no_portfolio BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (Id_publicacao) REFERENCES Publicacao(Id_publicacao)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Id_consumidor) REFERENCES Usuario(Id_usuario)
+        ON DELETE CASCADE
+);
+
