@@ -10,7 +10,6 @@ Tecnologias e Ferramentas Utilizadas:
 Plataformas/Ambientes de    •Desenvolvimento: VS Code, MySQL, BR modelo, Workbench.
 •Metodologia Ágil: Kanban - Trello (plataforma digital para organização de tarefas)
 
-Vídeo de Apresentação do Projeto
 
 Assista ao pitch completo do Sellart:
 https://youtu.be/K1PVCgFzN1E?si=minr9JsvOcV0gGKn
